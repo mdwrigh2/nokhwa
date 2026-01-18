@@ -300,6 +300,8 @@ pub enum FrameFormat {
     GRAY,
     RAWRGB,
     RAWBGR,
+    /// 10-bit 4:2:0 HDR format (semi-planar YUV). Decoding not supported - use buffer() for raw data.
+    P010,
 }
 
 impl Display for FrameFormat {
@@ -323,6 +325,9 @@ impl Display for FrameFormat {
             FrameFormat::NV12 => {
                 write!(f, "NV12")
             }
+            FrameFormat::P010 => {
+                write!(f, "P010")
+            }
         }
     }
 }
@@ -337,6 +342,7 @@ impl FromStr for FrameFormat {
             "RAWRGB" => Ok(FrameFormat::RAWRGB),
             "RAWBGR" => Ok(FrameFormat::RAWBGR),
             "NV12" => Ok(FrameFormat::NV12),
+            "P010" => Ok(FrameFormat::P010),
             _ => Err(NokhwaError::StructureError {
                 structure: "FrameFormat".to_string(),
                 error: format!("No match for {s}"),
@@ -355,6 +361,7 @@ pub const fn frame_formats() -> &'static [FrameFormat] {
         FrameFormat::GRAY,
         FrameFormat::RAWRGB,
         FrameFormat::RAWBGR,
+        FrameFormat::P010,
     ]
 }
 
@@ -367,6 +374,7 @@ pub const fn color_frame_formats() -> &'static [FrameFormat] {
         FrameFormat::NV12,
         FrameFormat::RAWRGB,
         FrameFormat::RAWBGR,
+        FrameFormat::P010,
     ]
 }
 

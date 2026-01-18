@@ -110,6 +110,12 @@ pub mod wmf {
         0x0010,
         [0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71],
     );
+    const MF_VIDEO_FORMAT_P010: GUID = GUID::from_values(
+        0x3031_3050, // 'P010' as little-endian
+        0x0000,
+        0x0010,
+        [0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71],
+    );
     const MF_VIDEO_FORMAT_RGB24: GUID = GUID::from_values(
         0x0000_0014,
         0x0000,
@@ -164,6 +170,7 @@ pub mod wmf {
     fn guid_to_frameformat(guid: GUID) -> Option<FrameFormat> {
         match guid {
             MF_VIDEO_FORMAT_NV12 => Some(FrameFormat::NV12),
+            MF_VIDEO_FORMAT_P010 => Some(FrameFormat::P010),
             MF_VIDEO_FORMAT_RGB24 => Some(FrameFormat::RAWBGR),
             MF_VIDEO_FORMAT_GRAY => Some(FrameFormat::GRAY),
             MF_VIDEO_FORMAT_YUY2 => Some(FrameFormat::YUYV),

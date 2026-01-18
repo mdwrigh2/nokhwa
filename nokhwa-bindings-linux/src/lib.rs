@@ -913,6 +913,7 @@ mod internal {
             "RGB3" => Some(FrameFormat::RAWRGB),
             "BGR3" => Some(FrameFormat::RAWBGR),
             "NV12" => Some(FrameFormat::NV12),
+            "P010" => Some(FrameFormat::P010),
             _ => None,
         }
     }
@@ -925,6 +926,7 @@ mod internal {
             FrameFormat::RAWRGB => FourCC::new(b"RGB3"),
             FrameFormat::RAWBGR => FourCC::new(b"BGR3"),
             FrameFormat::NV12 => FourCC::new(b"NV12"),
+            FrameFormat::P010 => FourCC::new(b"P010"),
         }
     }
 }

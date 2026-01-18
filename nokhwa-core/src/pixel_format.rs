@@ -87,6 +87,11 @@ impl FormatDecoder for RgbFormat {
                 Ok(rgb)
             }
             FrameFormat::NV12 => nv12_to_rgb(resolution, data, false),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "RGB".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 
@@ -123,6 +128,11 @@ impl FormatDecoder for RgbFormat {
             }
             FrameFormat::RAWBGR => buf_bgr_to_rgb(resolution, data, dest),
             FrameFormat::NV12 => buf_nv12_to_rgb(resolution, data, dest, false),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "RGB".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 }
@@ -166,6 +176,11 @@ impl FormatDecoder for RgbAFormat {
                 .flat_map(|x| [x[2], x[1], x[0], 255])
                 .collect()),
             FrameFormat::NV12 => nv12_to_rgb(resolution, data, true),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "RGBA".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 
@@ -219,6 +234,11 @@ impl FormatDecoder for RgbAFormat {
                 Ok(())
             }
             FrameFormat::NV12 => buf_nv12_to_rgb(resolution, data, dest, true),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "RGBA".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 }
@@ -282,6 +302,11 @@ impl FormatDecoder for LumaFormat {
                 .chunks(3)
                 .map(|px| ((i32::from(px[2]) + i32::from(px[1]) + i32::from(px[0])) / 3) as u8)
                 .collect()),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "Luma".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 
@@ -316,6 +341,11 @@ impl FormatDecoder for LumaFormat {
                 src: fcc,
                 destination: "BGR => Luma".to_string(),
                 error: "Conversion Error".to_string(),
+            }),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "Luma".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
             }),
         }
     }
@@ -381,6 +411,11 @@ impl FormatDecoder for LumaAFormat {
                 destination: "BGR => LumaA".to_string(),
                 error: "Conversion Error".to_string(),
             }),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "LumaA".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
+            }),
         }
     }
 
@@ -438,6 +473,11 @@ impl FormatDecoder for LumaAFormat {
                 src: fcc,
                 destination: "BGR => LumaA".to_string(),
                 error: "Conversion Error".to_string(),
+            }),
+            FrameFormat::P010 => Err(NokhwaError::ProcessFrameError {
+                src: fcc,
+                destination: "LumaA".to_string(),
+                error: "P010 decoding not supported. Use buffer() for raw data.".to_string(),
             }),
         }
     }
