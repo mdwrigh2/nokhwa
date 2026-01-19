@@ -540,6 +540,7 @@ mod internal {
                 FrameFormat::RAWRGB => FourCC::new(b"RGB3"),
                 FrameFormat::RAWBGR => FourCC::new(b"BGR3"),
                 FrameFormat::NV12 => FourCC::new(b"NV12"),
+                FrameFormat::P010 => FourCC::new(b"P010"),
             };
 
             let format = Format::new(new_fmt.width(), new_fmt.height(), v4l_fcc);
